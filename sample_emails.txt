@@ -1,0 +1,11 @@
+SAMPLE 1 — SUSPICIOUS (fictional)
+Sender: alerts@example.invalid
+Subject: Urgent action required
+Body: Your account suspended. Verify your account immediately by visiting http://192.0.2.10/login and confirm your password.
+
+SAMPLE 2 — ORDINARY (fictional)
+Sender: instructor@example.edu
+Subject: Class schedule
+Body: Hello, tomorrow's class starts at 10 AM. Please bring your notebook.
+
+Use only these fictional examples for testing. The IP address 192.0.2.10 is reserved for documentation and is not an actual target.

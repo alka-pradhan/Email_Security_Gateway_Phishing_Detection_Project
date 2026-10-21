@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Email Security Gateway</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="eyebrow">CYBERSECURITY INTERNSHIP PROJECT</div>
+      <h1>Email Security Gateway</h1>
+      <p class="subtitle">Rule-based phishing indicator detection</p>
+    </header>
+
+    <section class="panel">
+      <h2>Analyze an email</h2>
+      <p class="hint">Use sample or fictional email content. Do not paste confidential emails or personal information.</p>
+      <form method="post">
+        <label for="sender">Sender email (optional)</label>
+        <input id="sender" name="sender" value="{{ sender }}" placeholder="security@example.com">
+        <label for="subject">Subject</label>
+        <input id="subject" name="subject" value="{{ subject }}" placeholder="e.g. Verify your account">
+        <label for="email_text">Email body</label>
+        <textarea id="email_text" name="email_text" rows="8" required placeholder="Paste sample email text here...">{{ email_text }}</textarea>
+        <button type="submit">Scan email</button>
+      </form>
+    </section>
+
+    {% if result %}
+    <section class="panel results">
+      <div class="result-top">
+        <div>
+          <div class="eyebrow">SCAN RESULT</div>
+          <h2>{{ result.verdict }}</h2>
+        </div>
+        <div class="score"><strong>{{ result.score }}</strong><span>risk points</span></div>
+      </div>
+      <p>{{ result.explanation }}</p>
+      <h3>Detected indicators</h3>
+      <ul>
+        {% for finding in result.findings %}
+          <li>{{ finding }}</li>
+        {% endfor %}
+      </ul>
+      {% if result.urls %}
+      <h3>Links found (do not open them just to test)</h3>
+      <ul>{% for url in result.urls %}<li class="url">{{ url }}</li>{% endfor %}</ul>
+      {% endif %}
+      <p class="disclaimer">Educational demo only. A low-risk result is not proof that an email is legitimate.</p>
+    </section>
+    {% endif %}
+
+    <footer>Built with Python and Flask · Local educational demonstration</footer>
+  </main>
+</body>
+</html>
